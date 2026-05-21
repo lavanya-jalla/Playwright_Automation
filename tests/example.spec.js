@@ -1,19 +1,29 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
+test('home page has playwright title', async ({ page, context }) => {
+  await context.tracing.start(
+    {
+    screenshots: true,
+     snapshots: true
+  });
   await page.goto('https://playwright.dev/');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  test('has title', async ({ page }) => {
+    await page.goto('https://playwright.dev/');
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+    // Expect a title "to contain" a substring.
+    await expect(page).toHaveTitle(/Playwright/);
+  });
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  test('get started link', async ({ page }) => {
+    await page.goto('https://playwright.dev/');
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+    // Click the get started link.
+    await page.getByRole('link', { name: 'Get started' }).click();
+    await context.tracing.stop({ path: 'test1_trace.zip' });
+
+    // Expects page to have a heading with the name of Installation.
+    await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  })
 });
