@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-const { chromium } = require('playwright/test');
 
 test('snapdeal testing',async ({}) => {
   const browser = await chromium.launch({
