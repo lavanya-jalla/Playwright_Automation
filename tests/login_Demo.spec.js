@@ -10,17 +10,13 @@ test('Login Demo',async({page})=>{
 });
     await page.getByRole('link', { name: 'Sign in' }).click();
 })
-test('Login demo 2', async ({page}) => {
+test.only('Login demo 2', async ({page}) => {
     
    await page.goto('https://opensource-demo.orangehrmlive.com/');
    await page.getByRole('textbox', { name: 'Username' }).fill('Admin');
    await page.getByRole('textbox', { name: 'Password' }).fill('admin123');
    await page.getByRole('button', { name: 'Login' }).click();
-    await page.getByText('student user').click();
+   await page.locator('span').filter({ hasText: 'k Verma' }).click();
   await page.getByRole('menuitem', { name: 'Logout' }).click()
 
-})
-
-test.only('Login demo 3', async ({page}) => {
-    await page.pause();
 })
